@@ -1,5 +1,6 @@
 ﻿using Graph.Models;
 using AutoFixture;
+using System;
 
 namespace Graph.SeriesProcessors
 {
@@ -7,25 +8,29 @@ namespace Graph.SeriesProcessors
     {
         public List<SeriesPoint> Process(SeriesDetails details)
         {
-            //var fixture = new Fixture();
             var result = new List<SeriesPoint>();
 
             foreach (var x in details.XPoints)
             {
-                if (x > 8 && x <= 10)
+                if (x == 0)
                 {
-                    // 0.2 це п'ятий корінь, еквівалентний (2 / (7 * x))^(1/5)
-                    var y = (Math.Log(Math.Sqrt(Math.Abs(2 - x)) + 6, 2)) * (1 / (2 + Math.Exp(-x))) + Math.Pow(2.0 / (7 * x), 0.2);
+                    var y = x;
                     result.Add(new SeriesPoint(x, y));
                 }
-                else if (x >= -5 && x <= 5)
+                else if (x > 8 && x <= 10)
                 {
-                    var y = Math.Pow(x, -17) - 6;
+                    // 0.2 це п'ятий корінь, еквівалентний (2 / (7 * x))^(1/5)
+                    var y = (Math.Log(Math.Sqrt(Math.Abs(2 - x)) + 6, 2)) * (1 / (2 + Math.Exp(Math.Abs(-x)))) + Math.Pow(2.0 / (7 * x), 0.2);
+                    result.Add(new SeriesPoint(x, y));
+                }
+                else if (x >= -5 && x < 0 && x > 0 && x <= 5)
+                {
+                    var y = Math.Pow(x, -25);
                     result.Add(new SeriesPoint(x, y));
                 }
                 else
                 {
-                    var y = Math.Pow(x, -25);
+                    var y = Math.Pow(x, -17) - 6;
                     result.Add(new SeriesPoint(x, y));
                 }
             }
