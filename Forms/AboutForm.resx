@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>This program is designed for graphing functions.
+To begin, enter X start and X end and the step between them and then select the function to display.
+The function y = f(x) calculates the basic formula. Formulas y = x and y = sin(x) calculate the corresponding functions.</value>
+  </data>
+  <data name="textBox4.Text" xml:space="preserve">
+    <value>For the function y = random, you must additionally enter the minimum and maximum value of X in the pop-up window.
+You can also choose the type of graph - points, column or spline.
+In the window Transformation, you can enter the coefficient by which the X or Y graph will be shifted or stretched.
+By clicking on the button build, the graph is built.</value>
+  </data>
 </root>
