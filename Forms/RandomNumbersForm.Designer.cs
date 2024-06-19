@@ -43,62 +43,57 @@ namespace Graph.Forms
             // ApplyRandomButton
             // 
             ApplyRandomButton.BackColor = SystemColors.GradientActiveCaption;
-            ApplyRandomButton.Location = new Point(90, 105);
-            ApplyRandomButton.Margin = new Padding(4, 3, 4, 3);
+            ApplyRandomButton.Location = new Point(72, 105);
             ApplyRandomButton.Name = "ApplyRandomButton";
-            ApplyRandomButton.Size = new Size(184, 37);
+            ApplyRandomButton.Size = new Size(147, 37);
             ApplyRandomButton.TabIndex = 0;
             ApplyRandomButton.Text = "Apply";
             ApplyRandomButton.UseVisualStyleBackColor = false;
+            ApplyRandomButton.Click += ApplyRandomButton_Click;
             // 
             // RandomMinimumLabel
             // 
             RandomMinimumLabel.AutoSize = true;
-            RandomMinimumLabel.Location = new Point(61, 28);
-            RandomMinimumLabel.Margin = new Padding(4, 0, 4, 0);
+            RandomMinimumLabel.Location = new Point(49, 28);
             RandomMinimumLabel.Name = "RandomMinimumLabel";
-            RandomMinimumLabel.Size = new Size(97, 20);
+            RandomMinimumLabel.Size = new Size(85, 20);
             RandomMinimumLabel.TabIndex = 1;
             RandomMinimumLabel.Text = "X Minimum";
             // 
             // RandomMaximumLabel
             // 
             RandomMaximumLabel.AutoSize = true;
-            RandomMaximumLabel.Location = new Point(61, 72);
-            RandomMaximumLabel.Margin = new Padding(4, 0, 4, 0);
+            RandomMaximumLabel.Location = new Point(49, 72);
             RandomMaximumLabel.Name = "RandomMaximumLabel";
-            RandomMaximumLabel.Size = new Size(100, 20);
+            RandomMaximumLabel.Size = new Size(88, 20);
             RandomMaximumLabel.TabIndex = 2;
             RandomMaximumLabel.Text = "X Maximum";
             // 
             // RandomMinimumInput
             // 
-            RandomMinimumInput.Location = new Point(174, 24);
-            RandomMinimumInput.Margin = new Padding(4, 3, 4, 3);
+            RandomMinimumInput.Location = new Point(139, 24);
             RandomMinimumInput.Name = "RandomMinimumInput";
-            RandomMinimumInput.Size = new Size(133, 28);
+            RandomMinimumInput.Size = new Size(107, 27);
             RandomMinimumInput.TabIndex = 3;
             // 
             // RandomMaximumInput
             // 
-            RandomMaximumInput.Location = new Point(174, 69);
-            RandomMaximumInput.Margin = new Padding(4, 3, 4, 3);
+            RandomMaximumInput.Location = new Point(139, 69);
             RandomMaximumInput.Name = "RandomMaximumInput";
-            RandomMaximumInput.Size = new Size(133, 28);
+            RandomMaximumInput.Size = new Size(107, 27);
             RandomMaximumInput.TabIndex = 4;
             // 
             // RandomNumbersForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 20F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(371, 153);
+            ClientSize = new Size(297, 153);
             Controls.Add(RandomMaximumInput);
             Controls.Add(RandomMinimumInput);
             Controls.Add(RandomMaximumLabel);
             Controls.Add(RandomMinimumLabel);
             Controls.Add(ApplyRandomButton);
-            Margin = new Padding(4, 3, 4, 3);
             Name = "RandomNumbersForm";
             Text = "RandomNumbersForm";
             ResumeLayout(false);

@@ -1,4 +1,5 @@
 ﻿using Graph.Models;
+using AutoFixture;
 
 namespace Graph.SeriesProcessors
 {
@@ -6,6 +7,7 @@ namespace Graph.SeriesProcessors
     {
         public List<SeriesPoint> Process(SeriesDetails details)
         {
+            //var fixture = new Fixture();
             var result = new List<SeriesPoint>();
 
             foreach (var x in details.XPoints)

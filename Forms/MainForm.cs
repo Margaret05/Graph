@@ -1,11 +1,7 @@
-﻿using System.ComponentModel;
-using System.Configuration;
-using System.Windows.Forms.DataVisualization.Charting;
-using Graph.Enums;
+﻿using Graph.Enums;
 using Graph.Forms;
 using Graph.Helpers;
 using Graph.Models;
-using Microsoft.VisualBasic;
 using OfficeOpenXml;
 
 namespace Graph
@@ -313,7 +309,6 @@ namespace Graph
 
             return result;
         }
-        // тут ви маєте реалізувати відчинення вашої форми. Створіть її самостійно і напишіть код, який буде її закривати
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var aboutForm = new AboutForm();
@@ -364,7 +359,7 @@ namespace Graph
         {
             // дістаємо метадані файлу
             var fileInfo = new FileInfo(filePath);
-            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
             // створюємо новий ексель файл. using у C# викликає після завершення блоку коду операцію звільнення
             using (var excelPackage = new ExcelPackage(fileInfo))
@@ -454,6 +449,7 @@ namespace Graph
         // механізм зчитування excel файлу
         private void LoadSeriesFromWorksheet(ExcelWorksheet excelWorksheet)
         {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             // дістаємо графік за назвою вкладки, вони мають співпадати
             var series = DataChart.Series[excelWorksheet.Name];
 
