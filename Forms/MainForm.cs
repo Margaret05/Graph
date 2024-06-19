@@ -359,7 +359,7 @@ namespace Graph
         {
             // дістаємо метадані файлу
             var fileInfo = new FileInfo(filePath);
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             // створюємо новий ексель файл. using у C# викликає після завершення блоку коду операцію звільнення
             using (var excelPackage = new ExcelPackage(fileInfo))
@@ -420,7 +420,7 @@ namespace Graph
 
                         using (var excelPackage = new ExcelPackage(fileInfo)) // завантажуємо excel файл
                         {
-                            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                             ClearSeries(); // очищаємо наші точки на графіку
 
@@ -449,7 +449,7 @@ namespace Graph
         // механізм зчитування excel файлу
         private void LoadSeriesFromWorksheet(ExcelWorksheet excelWorksheet)
         {
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             // дістаємо графік за назвою вкладки, вони мають співпадати
             var series = DataChart.Series[excelWorksheet.Name];
 

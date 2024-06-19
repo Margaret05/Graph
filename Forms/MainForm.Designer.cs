@@ -382,8 +382,11 @@ namespace Graph
             chartArea1.AxisX.Enabled = AxisEnabled.True;
             chartArea1.AxisX.InterlacedColor = Color.White;
             chartArea1.AxisX.LabelStyle.Format = "N0";
+            chartArea1.AxisX.LineWidth = 2;
             chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorTickMark.LineWidth = 2;
             chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisX.MinorTickMark.LineWidth = 2;
             chartArea1.AxisX.Title = "X";
             chartArea1.AxisX.TitleFont = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             chartArea1.AxisX.TitleForeColor = Color.FromArgb(0, 0, 192);
@@ -392,8 +395,11 @@ namespace Graph
             chartArea1.AxisY.Enabled = AxisEnabled.True;
             chartArea1.AxisY.InterlacedColor = Color.White;
             chartArea1.AxisY.LabelStyle.Format = "N0";
+            chartArea1.AxisY.LineWidth = 2;
             chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MajorTickMark.LineWidth = 2;
             chartArea1.AxisY.MinorTickMark.Enabled = true;
+            chartArea1.AxisY.MinorTickMark.LineWidth = 2;
             chartArea1.AxisY.TextOrientation = TextOrientation.Horizontal;
             chartArea1.AxisY.Title = "Y";
             chartArea1.AxisY.TitleFont = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
