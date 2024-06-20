@@ -119,7 +119,7 @@
   </resheader>
   <data name="textBox1.Text" xml:space="preserve">
     <value>This program is designed for graphing functions.
-To begin, enter X start and X end and the step between them and then select the function to display.
+To begin, enter X start and X end and the step (the step should not exceed 0.5 so that the graph can be built) between them and then select the function to display.
 The function y = f(x) calculates the basic formula. Formulas y = x and y = sin(x) calculate the corresponding functions.</value>
   </data>
   <data name="textBox4.Text" xml:space="preserve">

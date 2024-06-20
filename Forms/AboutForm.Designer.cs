@@ -43,7 +43,7 @@
             textBox1.Location = new Point(16, 16);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(814, 94);
+            textBox1.Size = new Size(814, 112);
             textBox1.TabIndex = 0;
             textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -62,7 +62,7 @@
             // MainFunctionPhotoBox
             // 
             MainFunctionPhotoBox.Image = Properties.Resources.MainFunctionPhoto;
-            MainFunctionPhotoBox.Location = new Point(138, 116);
+            MainFunctionPhotoBox.Location = new Point(138, 134);
             MainFunctionPhotoBox.Name = "MainFunctionPhotoBox";
             MainFunctionPhotoBox.Size = new Size(575, 109);
             MainFunctionPhotoBox.TabIndex = 7;

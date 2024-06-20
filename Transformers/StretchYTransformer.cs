@@ -11,8 +11,8 @@ namespace Graph.Transformers
                 var yValue = point.YValues.First();
 
                 double y = coefficient < 0
-                    ? yValue * Math.Abs(coefficient)
-                    : yValue / coefficient;
+                    ? yValue * Math.Abs(coefficient)// якщо коефіцієнт від'ємний, то ми множимо точку на його абсолютне значення
+                    : yValue / coefficient;         // якщо коефіцієнт додатній, то ми ділимо точку на його значення
 
                 point.YValues = new[] { y };
             }

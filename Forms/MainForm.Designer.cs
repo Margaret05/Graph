@@ -94,15 +94,17 @@ namespace Graph
             // 
             // openToolStripMenuItem
             // 
+            openToolStripMenuItem.BackColor = SystemColors.GradientInactiveCaption;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(147, 26);
+            openToolStripMenuItem.Size = new Size(224, 26);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
+            saveAsToolStripMenuItem.BackColor = SystemColors.GradientInactiveCaption;
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(147, 26);
+            saveAsToolStripMenuItem.Size = new Size(224, 26);
             saveAsToolStripMenuItem.Text = "Save as";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 

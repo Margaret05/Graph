@@ -1,5 +1,4 @@
 ﻿using Graph.Models;
-using AutoFixture;
 using System;
 
 namespace Graph.SeriesProcessors

@@ -95,7 +95,7 @@ namespace Graph
 
             return isFirstValid && isLastValid && isStepValid;
         }
-        // функція для перевірки вмбраного  графіку
+        // функція для перевірки вибраного  графіку
         private void EnsureSeriesCheckBoxes()
         {
             var isChecked = false;
@@ -278,29 +278,40 @@ namespace Graph
             // якщо він правильний - робимо перетворення
             if (isRatioValid)
             {
-                foreach (var seriesName in checkedSeries)
+                try
                 {
-                    // дістаємо графік за його ім'ям
-                    var series = DataChart.Series[seriesName];
-
-                    // дістаємо усі елементи управління з блоку транформування
-                    var controls = TransformationGroupBox.Controls;
-
-                    foreach (var control in controls)
+                    if (ratio == 0)
                     {
-                        // якщо це натиснутий чекбокс
-                        if (control is CheckBox checkBox && checkBox.Checked)
-                        {
-                            // за ім'ям чекбоксу знаходимо відповідний механізм обробки
-                            var transformer = Configuration.TransformMappings[checkBox.Name];
+                        throw new InvalidDataException("Ratio cannot be 0.");
+                    }
+                    foreach (var seriesName in checkedSeries)
+                    {
+                        // дістаємо графік за його ім'ям
+                        var series = DataChart.Series[seriesName];
 
-                            // виконуємо перетворення точок
-                            transformer.Transform(series, ratio);
+                        // дістаємо усі елементи управління з блоку транформування
+                        var controls = TransformationGroupBox.Controls;
+
+                        foreach (var control in controls)
+                        {
+                            // якщо це натиснутий чекбокс
+                            if (control is CheckBox checkBox && checkBox.Checked)
+                            {
+                                // за ім'ям чекбоксу знаходимо відповідний механізм обробки
+                                var transformer = Configuration.TransformMappings[checkBox.Name];
+
+                                // виконуємо перетворення точок
+                                transformer.Transform(series, ratio);
+                            }
                         }
                     }
+                    // перебудовуємо графік
+                    DataChart.Invalidate();
                 }
-                // перебудовуємо графік
-                DataChart.Invalidate();
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
             }
             // інакше повідомляємо користувача
             else
@@ -377,6 +388,8 @@ namespace Graph
         {
             // дістаємо метадані файлу
             var fileInfo = new FileInfo(filePath);
+
+            // налаштування ліцензії, щоб програма працювала далі
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             // створюємо новий ексель файл. using у C# викликає після завершення блоку коду операцію звільнення
@@ -414,7 +427,6 @@ namespace Graph
                         row++;
                     }
                 }
-
                 excelPackage.SaveAs(fileInfo);
             }
         }
@@ -427,6 +439,9 @@ namespace Graph
                 // відкриваємо діалог де користувач має обрати файл
                 using (var dialog = new OpenFileDialog())
                 {
+                    // налаштування ліцензії, щоб програма працювала далі
+                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                    
                     dialog.Title = Constants.DialogTitle;   // встановлюємо повідомлення
                     dialog.Filter = Constants.DialogFormat; // дозволяємо завантажити тільки excel файли
 
@@ -438,8 +453,6 @@ namespace Graph
 
                         using (var excelPackage = new ExcelPackage(fileInfo)) // завантажуємо excel файл
                         {
-                            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
                             ClearSeries(); // очищаємо наші точки на графіку
 
                             // дістаємо усі вкладки у файлі
@@ -467,7 +480,9 @@ namespace Graph
         // механізм зчитування excel файлу
         private void LoadSeriesFromWorksheet(ExcelWorksheet excelWorksheet)
         {
+            // налаштування ліцензії, щоб програма працювала далі
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             // дістаємо графік за назвою вкладки, вони мають співпадати
             var series = DataChart.Series[excelWorksheet.Name];
 

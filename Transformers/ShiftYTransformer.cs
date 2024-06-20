@@ -8,7 +8,7 @@ namespace Graph.Transformers
         {
             foreach (var point in series.Points)
             {
-                var y = point.YValues.First() + coefficient;
+                var y = point.YValues.First() + coefficient; // додаємо до точки коефіцієнт
 
                 point.YValues = new[] { y };
             }

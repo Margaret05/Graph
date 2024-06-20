@@ -9,8 +9,8 @@ namespace Graph.Transformers
             foreach (var point in series.Points)
             {
                 double x = coefficient < 0
-                    ? point.XValue * Math.Abs(coefficient)
-                    : point.XValue / coefficient;
+                    ? point.XValue * Math.Abs(coefficient) // якщо коефіцієнт від'ємний, то ми множимо точку на його абсолютне значення
+                    : point.XValue / coefficient;           // якщо коефіцієнт додатній, то ми ділимо точку на його значення
 
                 point.XValue = x;
             }
