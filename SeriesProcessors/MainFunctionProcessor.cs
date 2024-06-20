@@ -23,7 +23,7 @@ namespace Graph.SeriesProcessors
                     var y = (Math.Log(Math.Sqrt(Math.Abs(2 - x)) + 6, 2)) * (1 / (2 + Math.Exp(Math.Abs(-x)))) + Math.Pow(2.0 / (7 * x), 0.2);
                     result.Add(new SeriesPoint(x, y));
                 }
-                else if (x >= -5 && x < 0 && x > 0 && x <= 5)
+                else if (x >= -5 && x < 0 || x > 0 && x <= 5)
                 {
                     var y = Math.Pow(x, -25);
                     result.Add(new SeriesPoint(x, y));

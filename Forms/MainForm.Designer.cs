@@ -353,11 +353,11 @@ namespace Graph
             // TransformationLabel
             // 
             TransformationLabel.AutoSize = true;
-            TransformationLabel.Location = new Point(34, 28);
+            TransformationLabel.Location = new Point(55, 27);
             TransformationLabel.Name = "TransformationLabel";
-            TransformationLabel.Size = new Size(88, 19);
+            TransformationLabel.Size = new Size(46, 19);
             TransformationLabel.TabIndex = 0;
-            TransformationLabel.Text = "Coefficient";
+            TransformationLabel.Text = "Ratio";
             // 
             // BuildButton
             // 

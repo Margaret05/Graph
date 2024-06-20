@@ -8,6 +8,7 @@ namespace Graph
 {
     public partial class MainForm : Form
     {
+        // змінні для рандомних мінімума та максимума, що можуть бути, а можуть і ні
         public double? RandomMinimum { get; set; }
         public double? RandomMaximum { get; set; }
         public MainForm()
@@ -29,48 +30,57 @@ namespace Graph
                 // очищаємо графіки
                 ClearSeries();
 
-                // перевіряємо кінцеві точки ( if a > b => swap (a,b) ) та крок
-                ValidateRange(ref xFirst, ref xLast);
-                ValidateStep(ref step);
-
-                // перевіряємо, щоб хоча б один графік було обрано. Якщо ні - обрати графік за замовченням
-                EnsureSeriesCheckBoxes();
-
-                // отримуємо і записуємо точки
-                var xPoints = GetXPoints(xFirst, xLast, step);
-
-                // створюємо об'єкт, який містить інформацію про точки Х, а також додаткові дані необхідні для побудови графіків. У нашому випадку це границі випадкових чисел
-                var details = GetSeriesDetails(xPoints);
-
-                // дістаємо імена усіх натиснутих графіків
-                var checkedSeries = GetListOfCheckedSeries();
-
-                // проходимося по кожному з них
-                foreach (var seriesName in checkedSeries)
+                // намагаємося виконати вказаний фрагмент коду
+                try
                 {
-                    // дістаємо відповідний графік з нашого графічного компонента
-                    var series = DataChart.Series[seriesName];
+                    // перевіряємо кінцеві точки ( if a > b => swap (a,b) ) та крок
+                    ValidateRange(ref xFirst, ref xLast);
+                    ValidateStep(ref step);
 
-                    // дістаємо відповідний йому процессор
-                    var processor = Configuration.SeriesMappings[seriesName];
+                    // перевіряємо, щоб хоча б один графік було обрано. Якщо ні - обрати графік за замовченням
+                    EnsureSeriesCheckBoxes();
 
-                    // виконуємо процес побудови списку точок (X, Y)
-                    var points = processor.Process(details);
+                    // отримуємо і записуємо точки
+                    var xPoints = GetXPoints(xFirst, xLast, step);
 
-                    // наносимо точки на відповідний графік
-                    foreach (var point in points)
+                    // створюємо об'єкт, який містить інформацію про точки Х, а також додаткові дані необхідні для побудови графіків.
+                    // У нашому випадку це границі випадкових чисел
+                    var details = GetSeriesDetails(xPoints);
+
+                    // дістаємо імена усіх натиснутих графіків
+                    var checkedSeries = GetListOfCheckedSeries();
+
+                    // проходимося по кожному з них
+                    foreach (var seriesName in checkedSeries)
                     {
-                        series.Points.AddXY(point.X, point.Y);
+                        // дістаємо відповідний графік з нашого графічного компонента
+                        var series = DataChart.Series[seriesName];
+
+                        // дістаємо відповідний йому процессор
+                        var processor = Configuration.SeriesMappings[seriesName];
+
+                        // виконуємо процес побудови списку точок (X, Y)
+                        var points = processor.Process(details);
+
+                        // наносимо точки на відповідний графік
+                        foreach (var point in points)
+                        {
+                            series.Points.AddXY(point.X, point.Y);
+                        }
                     }
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
                 }
             }
             // якщо перевірка не пройдена
             else
             {
                 MessageBox.Show("Check your input, please");
-            }
+            } 
         }
-
+        // функція перевірки вводу
         private bool Configure(out double xFirst, out double xLast, out double step)
         {
             // зчитуємо три поля вводу. Перевіряємо їх зміст. Повертаємо true, коли усі три введені правильно
@@ -85,6 +95,7 @@ namespace Graph
 
             return isFirstValid && isLastValid && isStepValid;
         }
+        // функція для перевірки вмбраного  графіку
         private void EnsureSeriesCheckBoxes()
         {
             var isChecked = false;
@@ -125,8 +136,9 @@ namespace Graph
             MainFunctionCheckBox.Text = Constants.MainFunctionSeries;
             LinearCheckBox.Text = Constants.LinearSeries;
             SinCheckBox.Text = Constants.SinSeries;
-
+            RandomCheckBox.Text = Constants.RandomSeries;
         }
+        // функція знаходження відмічених прапорців
         private List<string> GetListOfCheckedSeries()
         {
             var result = new List<string>();
@@ -194,11 +206,14 @@ namespace Graph
                 InputStep.Text = step.ToString();
                 MessageBox.Show(@$"Step is changed from ({step}) to ({step})");
             }
+            if(step > 0 && step < 0.5)
+            {
+                throw new InvalidDataException("Step cannot be less than 0.5.");
+            }
         }
         // функція для вибору виду графіка у комбінованому списку
         private void ChartTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             var allSeries = DataChart.Series;               // усі варіанти графіків
             var selectedType = ChartTypeComboBox.SelectedIndex; // обраний вид графіку
 
@@ -211,7 +226,7 @@ namespace Graph
                 item.ChartType = relatedChartType;
             }
         }
-
+        // реалізація рандомного прапорця
         private void RandomCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // якщо елемент став натиснутим - відкриваємо форму
@@ -220,7 +235,8 @@ namespace Graph
                 // створюємо нову форму
                 var randomNumberForm = new RandomNumbersForm();
 
-                // визначаємо операцію, яку необхідно виконати після зачинення форми. Нам необхідно зчитати уведені користувачем дані
+                // визначаємо операцію, яку необхідно виконати після зачинення форми.
+                // Нам необхідно зчитати уведені користувачем дані
                 randomNumberForm.FormClosed += (o, args) =>
                 {
                     RandomMinimum = randomNumberForm.RandomMinimum;
@@ -251,16 +267,16 @@ namespace Graph
             // якщо графіків немає, або жодний з них не обраний для модифікації - пишемо повідомлення і нічого далі не робимо
             if (!checkedSeries.Any() || !DoesSeriesExist())
             {
-                MessageBox.Show("Створіть хоча б один графік");
+                MessageBox.Show("Create at least one graph");
                 return;
             }
 
             // зчитуємо введений коефіцієнт
-            var coefficientInput = TransformationInput.Text;
-            var isCoefficientValid = InputHelper.ParseDoubleInput(coefficientInput, TransformationLabel.Text, out var coefficient);
+            var ratioInput = TransformationInput.Text;
+            var isRatioValid = InputHelper.ParseDoubleInput(ratioInput, TransformationLabel.Text, out var ratio);
 
             // якщо він правильний - робимо перетворення
-            if (isCoefficientValid)
+            if (isRatioValid)
             {
                 foreach (var seriesName in checkedSeries)
                 {
@@ -279,7 +295,7 @@ namespace Graph
                             var transformer = Configuration.TransformMappings[checkBox.Name];
 
                             // виконуємо перетворення точок
-                            transformer.Transform(series, coefficient);
+                            transformer.Transform(series, ratio);
                         }
                     }
                 }
@@ -289,7 +305,7 @@ namespace Graph
             // інакше повідомляємо користувача
             else
             {
-                MessageBox.Show("Перевірьте коефіцієнт");
+                MessageBox.Show("Check the ratio");
             }
         }
         private bool DoesSeriesExist()
@@ -309,11 +325,13 @@ namespace Graph
 
             return result;
         }
+        // інформаційна форма
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // створюємо форму
             var aboutForm = new AboutForm();
 
-            // open form with info
+            // та показуємо її
             aboutForm.ShowDialog();
         }
         // механізм збереження наших графіків до Excel файлу
